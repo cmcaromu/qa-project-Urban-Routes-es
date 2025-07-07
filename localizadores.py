@@ -37,6 +37,7 @@ class UrbanRoutesPage:
     verificar_swich_mantas_y_panuelos = (By.XPATH, "//div[@class='r-sw-container'][.//div[contains(text(), 'Manta y pañuelos')]]//input[@type='checkbox' and contains(@class, 'switch-input')]")
     text_manta_panuelos = (By.XPATH, "//div[@class='r-sw-label' and text()= 'Manta y pañuelos']")
     contador_helados_valor = (By.XPATH, '(//div[@class="counter-value"])[1]')
+    helados_total= (By.XPATH, '//div[@class= "r-counter-container"][.//div[@class= "r-counter-label" and text()="Helado"]]//div[@class="counter-value"] ')
     incrementar_helados_button = (By.XPATH, '(//div[@class="counter-plus"])[1]')
     boton_confirmar_pedido = (By.XPATH, '//span[@class= "smart-button-main" and contains(text(), "Pedir un taxi")]')
     grupo_botones_pedido = (By.CLASS_NAME, "order-btn-group")
@@ -253,6 +254,10 @@ class UrbanRoutesPage:
     def solicito_agregar_helados(self):
         boton = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.incrementar_helados_button))
         boton.click()
+
+    def get_helados_total(self):
+        total = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(self.helados_total))
+        return total.text
 
     # Defino metodo para dar clic en el botón final de pedir un taxi
     def verifico_boton_pedir_taxi_enabled(self):

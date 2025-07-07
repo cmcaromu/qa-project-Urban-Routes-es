@@ -56,12 +56,13 @@ class TestUrbanRoutes:
     def test_solicitar_helados(self):
         self.urban.solicito_agregar_helados()  # Solicito un par de helados.
         self.urban.solicito_agregar_helados()  # hacer doble click.
+        assert self.urban.get_helados_total() == "2"
 
     def test_buscar_taxi(self):
         assert self.urban.verifico_boton_pedir_taxi_enabled() == True, "El botón pedir taxi no esta activado"  # Verificamos que el botón pedir un taxi está activado.
         self.urban.clic_boton_final_pedir_un_taxi()  # Clic en pedir un taxi a final del formulario
         assert self.urban.verifico_espera_contador() == True, "El contador no muestra la solicitud del taxi"  # Espera el tiempo necesario para verificar que se asignó un conductor al servicio.
 
-    # @classmethod
-    # def teardown_class(cls):
-    #     cls.driver.quit()
+    @classmethod
+    def teardown_class(cls):
+        cls.driver.quit()
